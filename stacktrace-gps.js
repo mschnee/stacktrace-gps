@@ -212,6 +212,11 @@
         this.pinpoint = function StackTraceGPS$$pinpoint(stackframe) {
             return new Promise(function(resolve, reject) {
                 this.getMappedLocation(stackframe).then(function(mappedStackFrame) {
+                    if (opts.findFunctionNames === false) {
+                        resolve(mappedStackFrame);
+                        return;
+                    }
+                    
                     function resolveMappedStackFrame() {
                         resolve(mappedStackFrame);
                     }
