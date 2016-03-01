@@ -28,6 +28,12 @@ gps.findFunctionName(stackframe).then(callback, errback);
 => Promise(StackFrame('fun', [], 'http://localhost:3000/file.min.js', 1, 3284), Error)
 ```
 
+### Preventing function name lookups in minified bundles
+```js
+StackTrace.fromError(new Error(), {findFunctionNames: false}).then(callback, errback);
+=> Promise(StackFrame[], Error)
+```
+
 ## Installation
 ```
 npm install stacktrace-gps
@@ -40,6 +46,7 @@ https://raw.githubusercontent.com/stacktracejs/stacktrace-gps/master/dist/stackt
 #### `new StackTraceGPS(/*optional*/ options)` => StackTraceGPS
 options: Object
 * **sourceCache: Object (String URL => String Source)** - Pre-populate source cache to avoid network requests
+* **findFunctionNames: Boolean (default true)** - Set to `false` to prevent pinpointing function names and details.  Useful when generating a stacktrace from a minified bundle that has maps stripped of source information.
 * **offline: Boolean (default false)** - Set to `true` to prevent all network requests
 * **ajax: Function (String URL => Promise(responseText))** - Function to be used for making X-Domain requests
 * **atob: Function (String => String)** - Function to convert base64-encoded strings to their original representation
