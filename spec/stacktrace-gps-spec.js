@@ -42,6 +42,7 @@ describe('StackTraceGPS', function() {
         });
     });
 
+
     describe('#findFunctionName', function() {
         it('rejects given non-object StackFrame', function(done) {
             StackTraceGPS().findFunctionName('').then(done.fail, done); // jshint ignore:line

@@ -216,6 +216,11 @@
                         resolve(mappedStackFrame);
                     }
 
+                    if (opts.findFunctionName === false) {
+                        resolveMappedStackFrame();
+                        return;
+                    }
+                    
                     this.findFunctionName(mappedStackFrame)
                         .then(resolve, resolveMappedStackFrame)
                         ['catch'](resolveMappedStackFrame);
